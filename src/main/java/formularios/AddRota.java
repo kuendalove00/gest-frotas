@@ -184,7 +184,7 @@ public class AddRota extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
             Statement st = con.createStatement();
             
-            query = "INSERT INTO moto(`origem`, `destino`)"+
+            query = "INSERT INTO rota(`origem`, `destino`)"+
                     "VALUES('"+origem+"', '"+destino+"')";
             
             st.execute(query);

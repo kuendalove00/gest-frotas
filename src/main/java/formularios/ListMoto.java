@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,12 +39,19 @@ public class ListMoto extends javax.swing.JFrame {
 
         Left = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        LoginBtn = new javax.swing.JButton();
-        LoginBtn1 = new javax.swing.JButton();
+        btnReturn = new javax.swing.JButton();
+        btnLoad = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTable = new javax.swing.JTable();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         Left.setBackground(new java.awt.Color(255, 255, 255));
         Left.setMinimumSize(new java.awt.Dimension(400, 500));
@@ -51,23 +60,23 @@ public class ListMoto extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Listagem de Motos");
 
-        LoginBtn.setBackground(new java.awt.Color(0, 102, 102));
-        LoginBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LoginBtn.setForeground(new java.awt.Color(255, 255, 255));
-        LoginBtn.setText("Voltar");
-        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnReturn.setBackground(new java.awt.Color(0, 102, 102));
+        btnReturn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
+        btnReturn.setText("Voltar");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtnActionPerformed(evt);
+                btnReturnActionPerformed(evt);
             }
         });
 
-        LoginBtn1.setBackground(new java.awt.Color(0, 102, 102));
-        LoginBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LoginBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        LoginBtn1.setText("Carregar");
-        LoginBtn1.addActionListener(new java.awt.event.ActionListener() {
+        btnLoad.setBackground(new java.awt.Color(0, 102, 102));
+        btnLoad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLoad.setForeground(new java.awt.Color(255, 255, 255));
+        btnLoad.setText("Carregar");
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtn1ActionPerformed(evt);
+                btnLoadActionPerformed(evt);
             }
         });
 
@@ -84,6 +93,26 @@ public class ListMoto extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(dataTable);
 
+        btnEdit.setBackground(new java.awt.Color(0, 102, 102));
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setText("Editar");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(0, 102, 102));
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Excluir");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
         LeftLayout.setHorizontalGroup(
@@ -91,20 +120,22 @@ public class ListMoto extends javax.swing.JFrame {
             .addGroup(LeftLayout.createSequentialGroup()
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LeftLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(LeftLayout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(LeftLayout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addComponent(jLabel1)))
                 .addContainerGap(107, Short.MAX_VALUE))
-            .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
-                    .addContainerGap(617, Short.MAX_VALUE)
-                    .addComponent(LoginBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(55, 55, 55)))
+            .addGroup(LeftLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         LeftLayout.setVerticalGroup(
             LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,13 +145,13 @@ public class ListMoto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
-            .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
-                    .addContainerGap(445, Short.MAX_VALUE)
-                    .addComponent(LoginBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(19, 19, 19)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,56 +173,11 @@ public class ListMoto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         // System.out.println("Sign up btn clicked");
-        String Email, Password, query, fname = null, passDb = null;
-        String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
-        SUser = "root";
-        SPass = "";
-        int notFound = 0;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            var con = DriverManager.getConnection(SUrl, SUser, SPass);
-            Statement st = con.createStatement();
-            if("".equals(email.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Email Address is require", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(password.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Password is require", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }else {
-                Email    = email.getText();
-                Password = password.getText();
+    }//GEN-LAST:event_btnReturnActionPerformed
 
-                query = "SELECT * FROM user WHERE email= '"+Email+"'";
-
-                ResultSet rs = st.executeQuery(query);
-                while(rs.next()){
-                    passDb = rs.getString("password");
-                    fname = rs.getString("full_name");
-                    notFound = 1;
-                }
-                if(notFound == 1 && Password.equals(passDb)){
-                    Home HomeFrame = new Home();
-                    HomeFrame.setUser(fname);
-                    HomeFrame.setVisible(true);
-                    HomeFrame.pack();
-                    HomeFrame.setLocationRelativeTo(null);
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(new JFrame(), "Incorrect email or password", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-                password.setText("");
-
-            }
-        }catch(Exception e){
-            System.out.println("Error!" + e.getMessage());
-        }
-    }//GEN-LAST:event_LoginBtnActionPerformed
-
-    private void LoginBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtn1ActionPerformed
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here
@@ -228,7 +214,78 @@ public class ListMoto extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_LoginBtn1ActionPerformed
+    }//GEN-LAST:event_btnLoadActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here
+            dataTable.setModel(new DefaultTableModel());
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            var con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigef","root","");
+            Statement st = con.createStatement();
+            String query = "SELECT * FROM moto";
+            ResultSet rs = st.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
+
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String[cols];
+            for(int i = 0;i < cols;i++){
+                colName[i] = rsmd.getColumnName(i+1);
+                model.setColumnIdentifiers(colName);
+            }
+            String id, tipo_moto, cilindrada, tipo_partida, tipo_freio, veiculo;
+            while(rs.next()){
+                id = rs.getString(1);
+                tipo_moto = rs.getString(2);
+                cilindrada = rs.getString(3);
+                tipo_partida = rs.getString(4);
+                tipo_freio = rs.getString(5);
+                veiculo = rs.getString(6);
+                String[] row= {id,tipo_moto, cilindrada, tipo_partida, tipo_freio, veiculo};
+                model.addRow(row);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+
+        if (dataTable.getSelectedRowCount() == 1) {
+            int id = Integer.parseInt(dataTable.getValueAt(dataTable.getSelectedRow(),0).toString());
+
+            String SUrl, SUser, SPass, query;
+            SUrl = "jdbc:MySQL://localhost:3306/sigef";
+            SUser = "root";
+            SPass = "";
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                java.sql.Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
+                Statement st = con.createStatement();
+                query = "DELETE FROM moto WHERE id = " + id;
+                st.execute(query);
+                showMessageDialog(null, "Moto Removida!");
+
+            } catch (Exception e) {
+                System.out.println("Error!" + e.getMessage());
+            }
+        } else if (dataTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Tabela Vazia");
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para exclusão");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,8 +324,10 @@ public class ListMoto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
-    private javax.swing.JButton LoginBtn;
-    private javax.swing.JButton LoginBtn1;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnReturn;
     private javax.swing.JTable dataTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

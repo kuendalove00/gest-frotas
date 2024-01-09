@@ -7,10 +7,15 @@ package formularios;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -22,8 +27,39 @@ public class AddBicicleta extends javax.swing.JFrame {
     /**
      * Creates new form AddBicicleta
      */
-    public AddBicicleta() {
+    public AddBicicleta(int id) {
         initComponents();
+        
+        if(id == 0){
+            var n = 1;
+        }else
+        {
+            try {
+            // TODO add your handling code here
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            var con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigef", "root", "");
+            Statement st = con.createStatement();
+            String query = "SELECT * FROM bicicleta where id="+id;
+            ResultSet rs = st.executeQuery(query);
+            
+            String tamanho, tipo, marchas;
+            while (rs.next()) {
+                cmbTamanho.setSelectedItem(rs.getString(2));
+                cmbTipo.setSelectedItem(rs.getString(3));
+                cmbMarchas.setSelectedItem(rs.getString(4));
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+    }                                       
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
+        // TODO add your handling code here:
+        
     }
 
     /**
@@ -187,12 +223,12 @@ public class AddBicicleta extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        int tamanho, tipo, marchas;
+        String tamanho, tipo, marchas;
         String query;
         
-        tamanho = cmbTamanho.getSelectedIndex();
-        tipo = cmbTipo.getSelectedIndex();
-        marchas = cmbMarchas.getSelectedIndex();
+        tamanho = cmbTamanho.getSelectedItem().toString();
+        tipo = cmbTipo.getSelectedItem().toString();
+        marchas = cmbMarchas.getSelectedItem().toString();
         
         String SUrl, SUser, SPass;
         SUrl = "jdbc:MySQL://localhost:3306/sigef";

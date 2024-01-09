@@ -250,7 +250,7 @@ public class AddCarro extends javax.swing.JFrame {
         ac = cmbAc.getSelectedItem().toString();
         
         String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
+        SUrl = "jdbc:MySQL://localhost:3306/sigef";
         SUser = "root";
         SPass = "";
         try {
@@ -258,11 +258,11 @@ public class AddCarro extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
             Statement st = con.createStatement();
             
-            query = "INSERT INTO carro(`numero_portas`, `tipo_combustivel`, `ac`, `transmissao`)"+
-                    "VALUES('"+ac+"','"+portas+"', '"+combustivel+"' , '"+ac+"', '"+transmissao+"')";
+            query = "INSERT INTO carro(`matricula`,`numero_portas`, `tipo_combustivel`, `ac`, `transmissao`)"+
+                    "VALUES('"+matricula+"','"+portas+"', '"+combustivel+"' , '"+ac+"', '"+transmissao+"')";
             
             st.execute(query);
-            showMessageDialog(null, "Nova Bicicleta Adicionada!");
+            showMessageDialog(null, "Novo Carro Adicionado!");
             
         }catch(Exception e){
            System.out.println("Error!" + e.getMessage()); 

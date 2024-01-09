@@ -5,7 +5,6 @@
 package formularios;
 
 import com.sun.jdi.connect.spi.Connection;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -13,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,10 +40,13 @@ public class ListBicicleta extends javax.swing.JFrame {
 
         Left = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        LoginBtn = new javax.swing.JButton();
-        LoginBtn1 = new javax.swing.JButton();
+        btnReturn = new javax.swing.JButton();
+        btnLoad = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTable = new javax.swing.JTable();
+        btnNew = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -58,23 +62,23 @@ public class ListBicicleta extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Listagem de Bicicletas");
 
-        LoginBtn.setBackground(new java.awt.Color(0, 102, 102));
-        LoginBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LoginBtn.setForeground(new java.awt.Color(255, 255, 255));
-        LoginBtn.setText("Voltar");
-        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnReturn.setBackground(new java.awt.Color(0, 102, 102));
+        btnReturn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
+        btnReturn.setText("Voltar");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtnActionPerformed(evt);
+                btnReturnActionPerformed(evt);
             }
         });
 
-        LoginBtn1.setBackground(new java.awt.Color(0, 102, 102));
-        LoginBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LoginBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        LoginBtn1.setText("Carregar");
-        LoginBtn1.addActionListener(new java.awt.event.ActionListener() {
+        btnLoad.setBackground(new java.awt.Color(0, 102, 102));
+        btnLoad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLoad.setForeground(new java.awt.Color(255, 255, 255));
+        btnLoad.setText("Carregar");
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtn1ActionPerformed(evt);
+                btnLoadActionPerformed(evt);
             }
         });
 
@@ -91,43 +95,85 @@ public class ListBicicleta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(dataTable);
 
+        btnNew.setBackground(new java.awt.Color(0, 102, 102));
+        btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNew.setForeground(new java.awt.Color(255, 255, 255));
+        btnNew.setText("Novo");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
+
+        btnEdit.setBackground(new java.awt.Color(0, 102, 102));
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setText("Editar");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete1.setBackground(new java.awt.Color(0, 102, 102));
+        btnDelete1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDelete1.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete1.setText("Excluir");
+        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
         LeftLayout.setHorizontalGroup(
             LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LeftLayout.createSequentialGroup()
-                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(193, 193, 193)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
+                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(LeftLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(LeftLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(LeftLayout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(jLabel1)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addContainerGap(67, Short.MAX_VALUE)
+                        .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(73, 73, 73))
             .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
-                    .addContainerGap(617, Short.MAX_VALUE)
-                    .addComponent(LoginBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(55, 55, 55)))
+                    .addContainerGap(416, Short.MAX_VALUE)
+                    .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(256, 256, 256)))
         );
         LeftLayout.setVerticalGroup(
             LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LeftLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
             .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
-                    .addContainerGap(445, Short.MAX_VALUE)
-                    .addComponent(LoginBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(19, 19, 19)))
+                    .addContainerGap(448, Short.MAX_VALUE)
+                    .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,84 +195,39 @@ public class ListBicicleta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         // System.out.println("Sign up btn clicked");
-        String Email, Password, query, fname = null, passDb = null;
-        String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
-        SUser = "root";
-        SPass = "";
-        int notFound = 0;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            var con = DriverManager.getConnection(SUrl, SUser, SPass);
-            Statement st = con.createStatement();
-            if("".equals(email.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Email Address is require", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(password.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Password is require", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }else {
-                Email    = email.getText();
-                Password = password.getText();
+    }//GEN-LAST:event_btnReturnActionPerformed
 
-                query = "SELECT * FROM user WHERE email= '"+Email+"'";
-
-                ResultSet rs = st.executeQuery(query);
-                while(rs.next()){
-                    passDb = rs.getString("password");
-                    fname = rs.getString("full_name");
-                    notFound = 1;
-                }
-                if(notFound == 1 && Password.equals(passDb)){
-                    Home HomeFrame = new Home();
-                    HomeFrame.setUser(fname);
-                    HomeFrame.setVisible(true);
-                    HomeFrame.pack();
-                    HomeFrame.setLocationRelativeTo(null);
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(new JFrame(), "Incorrect email or password", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-                password.setText("");
-
-            }
-        }catch(Exception e){
-            System.out.println("Error!" + e.getMessage());
-        }
-    }//GEN-LAST:event_LoginBtnActionPerformed
-
-    private void LoginBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtn1ActionPerformed
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             // TODO add your handling code here
             dataTable.setModel(new DefaultTableModel());
-            
+
             Class.forName("com.mysql.cj.jdbc.Driver");
-            var con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigef","root","");
+            var con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigef", "root", "");
             Statement st = con.createStatement();
             String query = "SELECT * FROM bicicleta";
             ResultSet rs = st.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
-            
+
             DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
-            
+
             int cols = rsmd.getColumnCount();
             String[] colName = new String[cols];
-            for(int i = 0;i < cols;i++){
-                colName[i] = rsmd.getColumnName(i+1);
+            for (int i = 0; i < cols; i++) {
+                colName[i] = rsmd.getColumnName(i + 1);
                 model.setColumnIdentifiers(colName);
             }
             String id, tamanho, tipo, marchas, veiculo;
-            while(rs.next()){
+            while (rs.next()) {
                 id = rs.getString(1);
                 tamanho = rs.getString(2);
                 tipo = rs.getString(3);
                 marchas = rs.getString(4);
                 veiculo = rs.getString(5);
-                String[] row= {id,tamanho,tipo, marchas, veiculo};
+                String[] row = {id, tamanho, tipo, marchas, veiculo};
                 model.addRow(row);
             }
         } catch (ClassNotFoundException ex) {
@@ -234,37 +235,37 @@ public class ListBicicleta extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_LoginBtn1ActionPerformed
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-         try {
+        try {
             // TODO add your handling code here
             dataTable.setModel(new DefaultTableModel());
-            
+
             Class.forName("com.mysql.cj.jdbc.Driver");
-            var con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigef","root","");
+            var con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigef", "root", "");
             Statement st = con.createStatement();
             String query = "SELECT * FROM bicicleta";
             ResultSet rs = st.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
-            
+
             DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
-            
+
             int cols = rsmd.getColumnCount();
             String[] colName = new String[cols];
-            for(int i = 0;i < cols;i++){
-                colName[i] = rsmd.getColumnName(i+1);
+            for (int i = 0; i < cols; i++) {
+                colName[i] = rsmd.getColumnName(i + 1);
                 model.setColumnIdentifiers(colName);
             }
             String id, tamanho, tipo, marchas, veiculo;
-            while(rs.next()){
+            while (rs.next()) {
                 id = rs.getString(1);
                 tamanho = rs.getString(2);
                 tipo = rs.getString(3);
                 marchas = rs.getString(4);
                 veiculo = rs.getString(5);
-                String[] row= {id,tamanho,tipo, marchas, veiculo};
+                String[] row = {id, tamanho, tipo, marchas, veiculo};
                 model.addRow(row);
             }
         } catch (ClassNotFoundException ex) {
@@ -273,6 +274,31 @@ public class ListBicicleta extends javax.swing.JFrame {
             Logger.getLogger(ListBicicleta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        AddBicicleta FrameBicicleta = new AddBicicleta(0);
+        FrameBicicleta.setVisible(true);
+        FrameBicicleta.pack();
+        FrameBicicleta.setLocationRelativeTo(null); 
+        this.dispose();
+
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(dataTable.getValueAt(dataTable.getSelectedRow(),0).toString());
+        
+        AddBicicleta FrameBicicleta = new AddBicicleta(id);
+        FrameBicicleta.setVisible(true);
+        FrameBicicleta.pack();
+        FrameBicicleta.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelete1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,8 +337,11 @@ public class ListBicicleta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
-    private javax.swing.JButton LoginBtn;
-    private javax.swing.JButton LoginBtn1;
+    private javax.swing.JButton btnDelete1;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnReturn;
     private javax.swing.JTable dataTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
